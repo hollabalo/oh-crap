@@ -1,0 +1,7 @@
+# OhCrap v. 1.0
+# 2015 JM Gerona
+# Voyager
+
+projectname: OhCrap
+vendorid: com.voyager
+mainmodule: com.voyager.ohcrap

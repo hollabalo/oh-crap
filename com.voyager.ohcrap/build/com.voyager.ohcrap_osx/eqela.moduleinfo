@@ -1,0 +1,14 @@
+apple_plist_custom_xml: 
+url_schemes: 
+ldflags: -L.
+frameworks: Foundation,AppKit,CoreGraphics,QuartzCore,optional:SpriteKit
+depends: eq.api,eq.io,eq.os,eq.gui,eq.gui.engine,eq.widget.common,jkop.sprite,jkop.sprite.engine,jkop.sprite.util,eq.widget.common,jkop.sprite,jkop.sprite.engine,jkop.sprite.util
+moduletype: customguiapplication
+platform: osx
+url: 
+license: 
+copyright: 
+version: 1.0.0
+description: 
+displayname: OhCrap
+id: com.voyager.ohcrap

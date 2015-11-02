@@ -1,0 +1,69 @@
+// OhCrap v. 1.0
+// 2015 JM Gerona
+// Voyager
+
+public class PersonEntity : SEMovingSpriteEntity, SEPeriodicTimerHandler
+{
+	int x;
+	int y;
+	String speed = "2mm";
+	int pad = 10;
+	int direction = 0;
+	SEResourceCache rs;
+	
+	public void initialize(SEResourceCache rsc) {
+		base.initialize(rsc);
+		rs = rsc;
+		set_image_sheet(rsc.get_image_sheet("image"));
+		x = get_scene_width() * 0.5;
+		y = get_scene_height() - get_height() - get_height()/4;
+		add_entity(SEPeriodicTimer.for_handler(this, 10000));
+	}
+
+	public bool on_timer(TimeVal now) {
+		next_frame();
+		return(true);
+	}
+	
+	public void tick(TimeVal now, double delta) {
+		base.tick(now, delta);
+		if(is_key_pressed("left")) {
+			if(get_x() > 0) {
+				set_image_left();
+				x = get_x() - px(speed);
+			}
+		}
+		else if(is_key_pressed("right")) {
+			if(get_x() + get_width() + pad < get_scene_width()) {
+				set_image_right();
+				x = get_x() + px(speed);;
+			}
+		}
+		foreach(SEPointerInfo pi in iterate_pointers()) {
+			if(pi.get_pressed()) {
+				if(pi.get_x() < get_x()) {
+					set_image_left();
+				}
+				else {
+					set_image_right();
+				}
+				x += (pi.get_x() - get_x() - get_width()/2)/20;
+			}
+		}
+		move(x, y);
+	}
+
+	public void set_image_right() {
+		if(direction == 1) {
+			set_image_sheet(rs.get_image_sheet("image"));
+			direction = 0;
+		}
+	}
+
+	public void set_image_left() {
+		if(direction == 0) {
+			set_image_sheet(rs.get_image_sheet("image2"));
+			direction = 1;
+		}
+	}
+}
